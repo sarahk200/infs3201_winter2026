@@ -16,7 +16,7 @@ async function getEmployeeSchedule() {
 }
 
 /**
- * Display the employee list in a nicely formatted table.
+ * Display the employee list in a formatted table.
  */
 async function displayEmployees() {
     let employees = await logic.getAllEmployees()
