@@ -22,11 +22,8 @@ async function getEmployeeShifts(empId) {
 }
 
 /**
- * LLM used: ChatGPT (GPT-5.2 Thinking)
- * Prompt used:
- * "Write a JavaScript function computeShiftDuration(startTime, endTime) that takes time strings in 'HH:MM'
  *  24-hour format and returns a number of hours between them as a real number (e.g., 11:00 to 13:30 => 2.5).
- *  Assume same-day times, but if endTime is earlier than startTime treat it as crossing midnight."
+ *  Assume same-day times
  */
 function computeShiftDuration(startTime, endTime) {
     let s = startTime.split(':')
@@ -43,7 +40,7 @@ function computeShiftDuration(startTime, endTime) {
 }
 
 /**
- * Assign shift (same instructor checks) + NEW daily-hours limit feature.
+ * Assign shift (same instructor checks) and NEW daily-hours limit feature.
  */
 async function assignShift(empId, shiftId) {
     // check that empId exists
