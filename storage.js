@@ -56,7 +56,7 @@ async function getEmployeeShifts(empId) {
 }
 
 /**
- * NEW helper for the daily-hours limit feature
+ * helper for the daily-hours limit feature
  */
 async function getEmployeeShiftsOnDate(empId, date) {
     let all = await getEmployeeShifts(empId)
