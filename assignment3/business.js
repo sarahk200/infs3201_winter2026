@@ -1,8 +1,8 @@
 const persistence = require('./persistence')
 
 /**
- * Get all employees from persistence layer.
- * @returns {Promise<Array>} list of all employees
+ *Get all employees from persistence layer.
+ *@returns {Promise<Array>} list of all employees
  */
 async function getAllEmployees() {
     let employees = await persistence.getAllEmployees()
@@ -10,9 +10,9 @@ async function getAllEmployees() {
 }
 
 /**
- * Get one employee by their ID.
- * @param {string} empId - the employee ID
- * @returns {Promise<Object|null>} employee object or null if not found
+ *Get one employee by their ID.
+ *@param {string} empId the employee ID
+ *@returns {Promise<Object|null>} employee object or null if not found
  */
 async function getEmployee(empId) {
     let employee = await persistence.findEmployee(empId)
@@ -20,11 +20,11 @@ async function getEmployee(empId) {
 }
 
 /**
- * Update an employee's details after validating the inputs.
- * @param {string} empId - the employee ID to update
- * @param {string} name - the new name (will be trimmed)
- * @param {string} phone - the new phone number (will be trimmed)
- * @returns {Promise<string>} 'ok' if success, error message string if validation fails
+ *Update an employee's details after validating the inputs.
+ *@param {string} empId the employee ID to update
+ *@param {string} name the new name (will be trimmed)
+ *@param {string} phone the new phone number (will be trimmed)
+ *@returns {Promise<string>} 'ok' if success, error message string if validation fails
  */
 async function updateEmployee(empId, name, phone) {
     name = name.trim()
@@ -44,15 +44,15 @@ async function updateEmployee(empId, name, phone) {
 }
 
 /**
- * Get all shifts for an employee, sorted by date then start time.
- * @param {string} empId - the employee ID
- * @returns {Promise<Array>} sorted list of shift objects
+ *Get all shifts for an employee, sorted by date then start time.
+ *@param {string} empId - the employee ID
+ *@returns {Promise<Array>} sorted list of shift objects
  */
 async function getEmployeeShifts(empId) {
     let shifts = await persistence.getEmployeeShifts(empId)
 
-    // sort by date first, then by start time
-    for (let i = 0; i < shifts.length - 1; i++) {
+    //sort by date first, then by start time
+    for (let i = 0; i<shifts.length - 1; i++) {
         for (let j = i + 1; j < shifts.length; j++) {
             let a = shifts[i]
             let b = shifts[j]
