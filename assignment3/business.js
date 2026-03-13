@@ -52,16 +52,16 @@ async function getEmployeeShifts(empId) {
     let shifts = await persistence.getEmployeeShifts(empId)
 
     //sort by date first, then by start time
-    for (let i = 0; i<shifts.length - 1; i++) {
+    for (let i = 0; i<shifts.length-1; i++) {
         for (let j = i + 1; j < shifts.length; j++) {
-            let a = shifts[i]
-            let b = shifts[j]
-            let aKey = a.date + a.startTime
-            let bKey = b.date + b.startTime
-            if (aKey > bKey) {
-                let temp = shifts[i]
-                shifts[i] = shifts[j]
-                shifts[j] = temp
+            let a =shifts[i]
+            let b =shifts[j]
+            let aKey =a.date+a.startTime
+            let bKey =b.date+b.startTime
+            if (aKey>bKey){
+                let temp=shifts[i]
+                 shifts[i] =shifts[j]
+                shifts[j] =temp
             }
         }
     }
