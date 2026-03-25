@@ -11,10 +11,10 @@ app.set('view engine', 'handlebars')
 app.set('views', './templates')
 
 /**
- * Security logging middleware - logs every request to the security_log collection.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- * @param {Function} next - next middleware function
+ *Security logging middleware-logs every request to the security_log collection and check if user is logged in
+ *@param {Object} req - Express request object
+ *@param {Object} res - Express response object
+ *@param {Function} next - next middleware function
  */
 app.use(async (req, res, next) => {
     let username = 'unknown'
@@ -31,10 +31,10 @@ app.use(async (req, res, next) => {
 })
 
 /**
- * Auth middleware - checks session and redirects to login if not authenticated.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- * @param {Function} next - next middleware function
+ *Auth middleware-checks session and redirects to login if not authenticated
+ *@param {Object} req 
+ *@param {Object} res 
+ *@param {Function} next - next middleware function
  */
 async function checkAuth(req, res, next) {
     let sessionKey = req.headers.cookie
@@ -53,9 +53,9 @@ async function checkAuth(req, res, next) {
 }
 
 /**
- * Login page - shows login form with optional message.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ *Login page shows login form with optional message
+ *@param {Object} req 
+ *@param {Object} res 
  */
 app.get('/login', (req, res) => {
     let message = req.query.message || ''
@@ -63,9 +63,9 @@ app.get('/login', (req, res) => {
 })
 
 /**
- * Handle login form submission.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ *Handle login form submission
+ *@param {Object} req 
+ *@param {Object} res 
  */
 app.post('/login', async (req, res) => {
     let username = req.body.username
@@ -83,9 +83,9 @@ app.post('/login', async (req, res) => {
 })
 
 /**
- * Logout - clears cookie and deletes session.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ *Logout-clears cookie and deletes session
+ *@param {Object} req 
+ *@param {Object} res 
  */
 app.get('/logout', async (req, res) => {
     let sessionKey = req.headers.cookie
@@ -98,9 +98,9 @@ app.get('/logout', async (req, res) => {
 })
 
 /**
- * Landing page - shows list of all employees.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ *Landing page-shows list of all employees
+ *@param {Object} req 
+ *@param {Object} res 
  */
 app.get('/', checkAuth, async (req, res) => {
     let employees = await business.getAllEmployees()
@@ -108,9 +108,9 @@ app.get('/', checkAuth, async (req, res) => {
 })
 
 /**
- * Employee details page - shows employee info and their sorted shifts.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ *Employee details page-shows employee info and their sorted shifts
+ *@param {Object} req 
+ *@param {Object} res
  */
 app.get('/employee/:empId', checkAuth, async (req, res) => {
     let empId = req.params.empId
@@ -132,9 +132,9 @@ app.get('/employee/:empId', checkAuth, async (req, res) => {
 })
 
 /**
- * Edit employee page - shows prefilled form.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ *Edit employee page-shows prefilled form
+ *@param {Object} req 
+ *@param {Object} res 
  */
 app.get('/edit/:empId', checkAuth, async (req, res) => {
     let empId = req.params.empId
@@ -147,9 +147,9 @@ app.get('/edit/:empId', checkAuth, async (req, res) => {
 })
 
 /**
- * Handle edit form submission - validates and updates employee.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ *Handle edit form submission-validates and updates employee
+ *@param {Object} req 
+ *@param {Object} res 
  */
 app.post('/edit/:empId', checkAuth, async (req, res) => {
     let empId = req.params.empId

@@ -12,8 +12,8 @@ let sessionCollection = undefined
 let securityLogCollection = undefined
 
 /**
- * Connect to the MongoDB database if not already connected.
- * @returns {Promise<void>}
+ *Connect to the MongoDB database if not already connected.
+ *@returns {Promise<void>}
  */
 async function connectDatabase() {
     if (!client) {
@@ -30,8 +30,8 @@ async function connectDatabase() {
 }
 
 /**
- * Get all employees from the database.
- * @returns {Promise<Array>} list of employee objects
+ *Get all employees from the database.
+ *@returns {Promise<Array>} list of employee objects
  */
 async function getAllEmployees() {
     await connectDatabase()
@@ -40,9 +40,9 @@ async function getAllEmployees() {
 }
 
 /**
- * Find a single employee by their ObjectId.
- * @param {string} empId - the ObjectId string of the employee
- * @returns {Promise<Object|null>} the employee object or null
+ *Find a single employee by their ObjectId.
+ *@param {string} empId - the ObjectId string of the employee
+ *@returns {Promise<Object|null>} the employee object or null
  */
 async function findEmployee(empId) {
     await connectDatabase()
@@ -52,11 +52,11 @@ async function findEmployee(empId) {
 }
 
 /**
- * Update an employee's name and phone number.
- * @param {string} empId - the ObjectId string of the employee
- * @param {string} name - the new name
- * @param {string} phone - the new phone number
- * @returns {Promise<void>}
+ *Update an employee's name and phone number.
+ *@param {string} empId  ObjectId string of the employee
+ *@param {string} name new name
+ *@param {string} phone new phone number
+ *@returns {Promise<void>}
  */
 async function updateEmployee(empId, name, phone) {
     await connectDatabase()
@@ -68,9 +68,9 @@ async function updateEmployee(empId, name, phone) {
 }
 
 /**
- * Get all shifts that contain the employee's ObjectId in their employees array.
- * @param {string} empId - the ObjectId string of the employee
- * @returns {Promise<Array>} list of shift objects
+ *Get all shifts that contain the employee's ObjectId in their employees array.
+ *@param {string} empId ObjectId string of the employee
+ *@returns {Promise<Array>} list of shift objects
  */
 async function getEmployeeShifts(empId) {
     await connectDatabase()
@@ -80,9 +80,9 @@ async function getEmployeeShifts(empId) {
 }
 
 /**
- * Find a user by username for login.
- * @param {string} username - the username to look up
- * @returns {Promise<Object|null>} the user object or null
+ *Find a user by username for login.
+ *@param {string} username username to look up
+ *@returns {Promise<Object|null>} user object or null
  */
 async function findUser(username) {
     await connectDatabase()
@@ -91,11 +91,11 @@ async function findUser(username) {
 }
 
 /**
- * Save a new session to the database.
- * @param {string} sessionKey - the UUID session key
- * @param {Date} expiry - the expiry date
- * @param {Object} data - the session data to store
- * @returns {Promise<void>}
+ *Save a new session to the database.
+ *@param {string} sessionKey - the UUID session key
+ *@param {Date} expiry expiry date
+ *@param {Object} data session data to store
+ *@returns {Promise<void>}
  */
 async function saveSession(sessionKey, expiry, data) {
     await connectDatabase()
@@ -103,9 +103,9 @@ async function saveSession(sessionKey, expiry, data) {
 }
 
 /**
- * Get a session by its key.
- * @param {string} sessionKey - the session key to look up
- * @returns {Promise<Object|null>} the session object or null
+ *Get a session by its key.
+ *@param {string} sessionKey session key to look up
+ * @returns {Promise<Object|null>}  session object or null
  */
 async function getSession(sessionKey) {
     await connectDatabase()
@@ -114,9 +114,9 @@ async function getSession(sessionKey) {
 }
 
 /**
- * Delete a session by its key.
- * @param {string} sessionKey - the session key to delete
- * @returns {Promise<void>}
+ *Delete a session by its key.
+ *@param {string} sessionKey session key to delete
+ *@returns {Promise<void>}
  */
 async function deleteSession(sessionKey) {
     await connectDatabase()
@@ -124,10 +124,10 @@ async function deleteSession(sessionKey) {
 }
 
 /**
- * Update the expiry time of an existing session.
- * @param {string} sessionKey - the session key to update
- * @param {Date} newExpiry - the new expiry date
- * @returns {Promise<void>}
+ *Update the expiry time of an existing session.
+ *@param {string} sessionKey  session key to update
+ *@param {Date} newExpiry  new expiry date
+ *@returns {Promise<void>}
  */
 async function updateSessionExpiry(sessionKey, newExpiry) {
     await connectDatabase()
@@ -138,11 +138,11 @@ async function updateSessionExpiry(sessionKey, newExpiry) {
 }
 
 /**
- * Add an entry to the security log collection.
- * @param {string} username - the username if known, or 'unknown'
- * @param {string} url - the URL that was accessed
- * @param {string} method - the HTTP method used
- * @returns {Promise<void>}
+ *Add an entry to the security log collection.
+ *@param {string} username  username if known, or 'unknown'
+ *@param {string} url URL that was accessed
+ *@param {string} method the HTTP method used
+ *@returns {Promise<void>}
  */
 async function addSecurityLog(username, url, method) {
     await connectDatabase()

@@ -2,8 +2,8 @@ const persistence = require('./persistence')
 const crypto = require('crypto')
 
 /**
- * Get all employees from persistence layer.
- * @returns {Promise<Array>} list of all employees
+ *Get all employees from persistence layer
+ *@returns list of employees
  */
 async function getAllEmployees() {
     let employees = await persistence.getAllEmployees()
@@ -11,9 +11,9 @@ async function getAllEmployees() {
 }
 
 /**
- * Get one employee by their ObjectId string.
- * @param {string} empId - the ObjectId string
- * @returns {Promise<Object|null>} employee object or null
+ *Get one employee by their ObjectId string
+ *@param {string} empId - the ObjectId string
+ *@returns {Promise<Object|null>} employee object or null
  */
 async function getEmployee(empId) {
     let employee = await persistence.findEmployee(empId)
@@ -21,11 +21,11 @@ async function getEmployee(empId) {
 }
 
 /**
- * Update employee details after validating inputs.
- * @param {string} empId - the ObjectId string of the employee
- * @param {string} name - new name
- * @param {string} phone - new phone number
- * @returns {Promise<string>} 'ok' or error message
+ *Update employee details after validating inputs
+ *@param {string} empId the ObjectId string of the employee
+ *@param {string} name new name
+ *@param {string} phone new phone number
+ *@returns {Promise<string>} 'ok' or error message
  */
 async function updateEmployee(empId, name, phone) {
     name = name.trim()
@@ -45,9 +45,9 @@ async function updateEmployee(empId, name, phone) {
 }
 
 /**
- * Get all shifts for an employee sorted by date and start time.
- * @param {string} empId - the ObjectId string of the employee
- * @returns {Promise<Array>} sorted list of shift objects
+ *Get all shifts for an employee sorted by date and start time
+ *@param {string} empId - the ObjectId string of the employee
+ *@returns {Promise<Array>} sorted list of shift objects
  */
 async function getEmployeeShifts(empId) {
     let shifts = await persistence.getEmployeeShifts(empId)
@@ -70,19 +70,19 @@ async function getEmployeeShifts(empId) {
 }
 
 /**
- * Hash a password using SHA256.
- * @param {string} password - plain text password
- * @returns {string} the hashed password
+ *Hash a password using SHA256
+ *@param {string} password plain text password
+ *@returns {string} the hashed password
  */
 function hashPassword(password) {
     return crypto.createHash('sha256').update(password).digest('hex')
 }
 
 /**
- * Check login credentials and return username if valid.
- * @param {string} username - the username entered
- * @param {string} password - the plain text password entered
- * @returns {Promise<string|undefined>} username if valid, undefined if not
+ *Check login credentials and return username if valid
+ *@param {string} username the username entered
+ *@param {string} password the plain text password entered
+ *@returns {Promise<string|undefined>} username if valid, undefined if not
  */
 async function checkLogin(username, password) {
     let user = await persistence.findUser(username)
@@ -97,9 +97,9 @@ async function checkLogin(username, password) {
 }
 
 /**
- * Start a new session for the given username.
- * @param {string} username - the logged in username
- * @returns {Promise<string>} the session key UUID
+ *Start a new session for the given username
+ *@param {string} username the logged in username
+ *@returns {Promise<string>} the session key UUID
  */
 async function startSession(username) {
     let sessionKey = crypto.randomUUID()
@@ -109,9 +109,9 @@ async function startSession(username) {
 }
 
 /**
- * Get session data if the session is still valid (not expired).
- * @param {string} sessionKey - the session key from the cookie
- * @returns {Promise<Object|null>} session data or null if expired/not found
+ *Get session data if the session is still valid (not expired)
+ *@param {string} sessionKey the session key from the cookie
+ *@returns {Promise<Object|null>} session data or null if expired/not found
  */
 async function getSession(sessionKey) {
     let session = await persistence.getSession(sessionKey)
@@ -129,20 +129,20 @@ async function getSession(sessionKey) {
 }
 
 /**
- * Delete a session (logout).
- * @param {string} sessionKey - the session key to delete
- * @returns {Promise<void>}
+ *Delete a session (logout)
+ *@param {string} sessionKey - the session key to delete
+ *@returns {Promise<void>}
  */
 async function deleteSession(sessionKey) {
     await persistence.deleteSession(sessionKey)
 }
 
 /**
- * Log a security event.
- * @param {string} username - the username or 'unknown'
- * @param {string} url - the URL accessed
- * @param {string} method - the HTTP method
- * @returns {Promise<void>}
+ *Log a security event
+ *@param {string} username the username or 'unknown'
+ *@param {string} url the URL accessed
+ *@param {string} method the HTTP method
+ *@returns {Promise<void>}
  */
 async function logAccess(username, url, method) {
     await persistence.addSecurityLog(username, url, method)

@@ -7,8 +7,8 @@ let client = undefined
 let db = undefined
 
 /**
- * Connect to the MongoDB database.
- * @returns {Promise<void>}
+ *Connect to the MongoDB database.
+ *@returns {Promise<void>}
  */
 async function connectDatabase() {
     if (!client) {
