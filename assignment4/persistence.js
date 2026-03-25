@@ -154,10 +154,26 @@ async function addSecurityLog(username, url, method) {
     })
 }
 
+/**
+ *Update an employee's photo filename
+ *@param {string} empId ObjectId string of the employee
+ *@param {string} filename the uploaded photo filename
+ *@returns {Promise<void>}
+ */
+async function updateEmployeePhoto(empId, filename) {
+    await connectDatabase()
+    let empObjectId = new mongodb.ObjectId(empId)
+    await employeesCollection.updateOne(
+        { _id: empObjectId },
+        { $set: { photo: filename } }
+    )
+}
+
 module.exports = {
     getAllEmployees,
     findEmployee,
     updateEmployee,
+    updateEmployeePhoto,
     getEmployeeShifts,
     findUser,
     saveSession,

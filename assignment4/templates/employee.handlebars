@@ -8,6 +8,14 @@
 
 <p>Name: {{employee.name}}</p>
 <p>Phone: {{employee.phone}}</p>
+{{#if employee.photo}}
+<img src="/photo/{{employee.photo}}" width="150"><br>
+{{/if}}
+
+<form action="/photo/{{employee._id}}" method="POST" enctype="multipart/form-data">
+    <label>Upload Photo: <input type="file" name="photo"></label>
+    <input type="submit" value="Upload">
+</form>
 <a href="/edit/{{employee._id}}">Edit Details</a>
 
 <h2>Shifts</h2>
@@ -20,7 +28,7 @@
     {{#each shifts}}
     <tr>
         <td>{{this.date}}</td>
-        <td {{#if this.isMorning}}class="morning"{{/if}}>{{this.startTime}}</td>
+        <td {{#if this.isMorning}}class="morning" {{/if}}>{{this.startTime}}</td>
         <td>{{this.endTime}}</td>
     </tr>
     {{/each}}

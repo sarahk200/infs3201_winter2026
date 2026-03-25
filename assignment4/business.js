@@ -148,10 +148,21 @@ async function logAccess(username, url, method) {
     await persistence.addSecurityLog(username, url, method)
 }
 
+/**
+ *Update the photo for an employee
+ *@param {string} empId the ObjectId string of the employee
+ *@param {string} filename the filename of the uploaded photo
+ *@returns {Promise<void>}
+ */
+async function updateEmployeePhoto(empId, filename) {
+    await persistence.updateEmployeePhoto(empId, filename)
+}
+
 module.exports = {
     getAllEmployees,
     getEmployee,
     updateEmployee,
+    updateEmployeePhoto,
     getEmployeeShifts,
     checkLogin,
     startSession,
