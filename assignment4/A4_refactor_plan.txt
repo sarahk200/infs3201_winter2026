@@ -1,0 +1,34 @@
+A4 Refactor Plan
+=================
+
+Collections That Will Change
+-----------------------------
+- employees: remove the employeeId field, use _id (ObjectId) instead
+- shifts: remove the shiftId field, add an embedded employees array of ObjectIds, use _id instead
+- assignments: this whole collection will be removed after migration
+
+Persistence Functions That Need to Change
+------------------------------------------
+- findEmployee(empId): used to search by employeeId string, now will search by _id ObjectId
+- getEmployeeShifts(empId): used to look through assignments collection, now will search shifts where employees array contains the employee ObjectId
+- updateEmployee(empId, ...): used to filter by employeeId string, now needs ObjectId
+- Any function that used shiftId needs to use _id ObjectId instead
+
+Business Logic Changes
+-----------------------
+- getEmployee() will pass ObjectId instead of string ID
+- getEmployeeShifts() logic changes because we no longer need the assignments collection
+- URLs will use MongoDB ObjectId strings instead of E001, E002 etc
+
+How Embedded Arrays Affect Updates
+------------------------------------
+- Before: to assign an employee to a shift, we inserted into the assignments collection
+- After: we use $push to add an ObjectId to the employees array inside the shift document
+- This means we cannot simply delete and recreate records, we need to use updateOne with $push or $pull
+
+Risks and Complications
+------------------------
+- The _id values are ObjectId objects not strings, so we need to wrap them with new mongodb.ObjectId()
+- URLs currently use E001 style IDs, after migration they will use long hex ObjectId strings
+- The transform must be done carefully so no data is lost
+- Need to make sure the employees array in shifts is populated correctly from the old assignments collection before deleting anything
