@@ -1,0 +1,6 @@
+<h1>List of Employees</h1>
+<ul>
+    {{#each employees}}
+    <li><a href="/employee/{{this.employeeId}}">{{this.name}}</a></li>
+    {{/each}}
+</ul>

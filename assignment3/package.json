@@ -1,0 +1,14 @@
+{
+    "name": "infs3201_winter2026",
+    "version": "1.0.0",
+    "description": "Assignment 3 - Employee Scheduling Web App",
+    "main": "web.js",
+    "scripts": {
+        "start": "node web.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "express-handlebars": "^7.1.2",
+        "mongodb": "^6.3.0"
+    }
+}

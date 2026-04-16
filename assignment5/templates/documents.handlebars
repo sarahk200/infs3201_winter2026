@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documents - {{employee.name}}</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Documents for {{employee.name}}</h1>
+
+    <p><a href="/employees">← Back to Employees</a></p>
+
+    {{#if error}}
+        <p class="error">{{error}}</p>
+    {{/if}}
+
+    {{#if success}}
+        <p class="success">{{success}}</p>
+    {{/if}}
+
+    <h2>Uploaded Documents</h2>
+    {{#if documents.length}}
+        <ul>
+            {{#each documents}}
+                <li>
+                    <a href="/employees/{{../employee._id}}/documents/{{this}}" target="_blank">{{this}}</a>
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No documents uploaded yet.</p>
+    {{/if}}
+
+    <h2>Upload a Document</h2>
+    <p>PDF files only. Maximum size: 2MB. Maximum 5 documents per employee.</p>
+
+    <form method="POST" action="/employees/{{employee._id}}/documents" enctype="multipart/form-data">
+        <label for="document">Choose PDF file:</label>
+        <input type="file" id="document" name="document" accept=".pdf" required>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
