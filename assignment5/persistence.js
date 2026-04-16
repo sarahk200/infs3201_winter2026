@@ -19,7 +19,7 @@ let securityLogCollection = undefined
  */
 async function connectDatabase() {
     if (!client) {
-        client = new mongodb.MongoClient('mongodb+srv://60106796_db_user:nC1AVcqdL6prg2Gj@assignment5.6lfqqr4.mongodb.net/')
+        client = new mongodb.MongoClient('mongodb+srv://60106796_db_user:<password>@assignment5.6lfqqr4.mongodb.net/')
         await client.connect()
         db = client.db('infs3201_winter2026')
         employeesCollection = db.collection('employees')
